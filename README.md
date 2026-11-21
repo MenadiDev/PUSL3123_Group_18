@@ -3,12 +3,12 @@
 Neural-network image classification on **CIFAR-10** with PyTorch. Four Jupyter notebooks, one per exercise, investigate
 MLP vs CNN architectures, regularisation, and the effect of model width and depth.
 
-| Exercise | Notebook | What it does | Runtime (Tesla T4 GPU) | Open in Colab |
-| --- | --- | --- | --- | --- |
-| 1 – MLP classifier | [`Exercise_1_MLP.ipynb`](Group_18_Set_Exercises/Exercise_1/Exercise_1_MLP.ipynb) | Three-layer MLP (3072→512→256→10); loss/accuracy curves; confusion matrix | ~6 min | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MenadiDev/PUSL3123_Group_18/blob/main/Group_18_Set_Exercises/Exercise_1/Exercise_1_MLP.ipynb) |
-| 2 – CNN vs MLP | [`Exercise2_CNN.ipynb`](Group_18_Set_Exercises/Exercise_2/Exercise2_CNN.ipynb) | Three-layer CNN vs retrained MLP under identical settings; parameter counts, confusion matrices, learnt filters | ~12 min | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MenadiDev/PUSL3123_Group_18/blob/main/Group_18_Set_Exercises/Exercise_2/Exercise2_CNN.ipynb) |
-| 3 – Regularisation | [`Exercise3_Regularisation.ipynb`](Group_18_Set_Exercises/Exercise_3/Exercise3_Regularisation.ipynb) | Baseline CNN vs dropout, data augmentation and both combined (3 seeds each, 12 runs); Welch t-tests; 60-epoch follow-up | ~2 h | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MenadiDev/PUSL3123_Group_18/blob/main/Group_18_Set_Exercises/Exercise_3/Exercise3_Regularisation.ipynb) |
-| 4 – Width and depth | [`Exercise4_Width_Depth.ipynb`](Group_18_Set_Exercises/Exercise_4/Exercise4_Width_Depth.ipynb) | Three widths and three depths of CNN (3 seeds each, 18 runs); compute cost (MACs); Welch t-tests | ~1.75 h | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MenadiDev/PUSL3123_Group_18/blob/main/Group_18_Set_Exercises/Exercise_4/Exercise4_Width_Depth.ipynb) |
+| Exercise | Notebook | What it does | Open in Colab |
+| --- | --- | --- | --- |
+| 1 – MLP classifier | [`Exercise_1_MLP.ipynb`](Group_18_Set_Exercises/Exercise_1/Exercise_1_MLP.ipynb) | Three-layer MLP (3072→512→256→10); loss/accuracy curves; confusion matrix | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MenadiDev/PUSL3123_Group_18/blob/main/Group_18_Set_Exercises/Exercise_1/Exercise_1_MLP.ipynb) |
+| 2 – CNN vs MLP | [`Exercise2_CNN.ipynb`](Group_18_Set_Exercises/Exercise_2/Exercise2_CNN.ipynb) | Three-layer CNN vs retrained MLP under identical settings; parameter counts, confusion matrices, learnt filters | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MenadiDev/PUSL3123_Group_18/blob/main/Group_18_Set_Exercises/Exercise_2/Exercise2_CNN.ipynb) |
+| 3 – Regularisation | [`Exercise3_Regularisation.ipynb`](Group_18_Set_Exercises/Exercise_3/Exercise3_Regularisation.ipynb) | Baseline CNN vs dropout, data augmentation and both combined (3 seeds each, 12 runs); Welch t-tests; 60-epoch follow-up | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MenadiDev/PUSL3123_Group_18/blob/main/Group_18_Set_Exercises/Exercise_3/Exercise3_Regularisation.ipynb) |
+| 4 – Width and depth | [`Exercise4_Width_Depth.ipynb`](Group_18_Set_Exercises/Exercise_4/Exercise4_Width_Depth.ipynb) | Three widths and three depths of CNN (3 seeds each, 18 runs); compute cost (MACs); Welch t-tests | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MenadiDev/PUSL3123_Group_18/blob/main/Group_18_Set_Exercises/Exercise_4/Exercise4_Width_Depth.ipynb) |
 
 Each notebook is self-contained and can be run on its own. All four notebooks are submitted with their outputs, so results and figures can be read without re-running.
 
@@ -24,8 +24,7 @@ PUSL3123_Group_18/
     │   ├── ex1_results.csv
     │   ├── mlp_loss_curve.png
     │   ├── mlp_accuracy_curve.png
-    │   ├── mlp_confusion_matrix.png
-    │   └── mlp_baseline.pth              # trained MLP weights
+    │   └── mlp_confusion_matrix.png
     ├── Exercise_2/
     │   ├── Exercise2_CNN.ipynb
     │   ├── ex2_results.csv
