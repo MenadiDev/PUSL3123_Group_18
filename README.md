@@ -1,78 +1,105 @@
-# PUSL3123
-AI and Machine Learning Assessment 1: Set Exercises
+# PUSL3123 AI and Machine Learning – Assessment 1: Set Exercises (Group 18)
 
-Code for the group coursework investigating how network architecture, regularisation, data augmentation and model size affect image classification on CIFAR-10, using PyTorch.
+Neural-network image classification on **CIFAR-10** with PyTorch. Four notebooks, one per exercise, investigate
+MLP vs CNN architectures, regularisation, and the effect of model width and depth.
 
-## Contents
+| Notebook | Exercise | What it does | Approx. runtime (Tesla T4 GPU) |
+| --- | --- | --- | --- |
+| `Exercise_1_MLP.ipynb` | 1 – MLP classifier | Three-layer MLP (3072→512→256→10), loss/accuracy curves, confusion matrix | ~6 min |
+| `Exercise2_CNN.ipynb` | 2 – CNN vs MLP | Three-layer CNN vs retrained MLP under identical settings; parameter counts, confusion matrices, learnt filters | ~12 min |
+| `Exercise3_PUSL3123.ipynb` | 3 – Regularisation | Baseline CNN vs dropout, data augmentation and both combined; 3 seeds each (12 runs) | ~1.5 h |
+| `Exercise4_Width_Depth.ipynb` | 4 – Width and depth | Three widths and three depths; 3 seeds each (18 runs) | ~1.75 h |
 
-| Notebook | Exercise | What it does |
-|---|---|---|
-| `Exercise1_MLP.ipynb` | 1 | Three-layer MLP baseline (3072-512-256-10) |
-| `Exercise2_CNN.ipynb` | 2 | Three-layer CNN (2 conv + 1 linear) compared with the MLP |
-| `Exercise3_Regularisation.ipynb` | 3 | Dropout and data augmentation vs an unchanged CNN baseline (3 seeds) |
-| `Exercise4_Width_Depth.ipynb` | 4 | Three widths and three depths of CNN (3 seeds) |
+Each notebook is self-contained and can be run on its own.
 
-Each notebook is self-contained: it prepares the data, defines the models, trains and evaluates, and saves its own tables and figures.
+## 1. Requirements
 
-## Requirements
+- Python 3.10 or newer (developed on Python 3.13, PyTorch 2.14, torchvision 0.29, CUDA 13.0)
+- A CUDA GPU is strongly recommended. The code falls back to Apple MPS or CPU automatically, but Exercises 3–4 take many hours on a CPU.
+- About 200 MB of free disk space for the dataset.
 
-- Python 3.9+
-- `torch`, `torchvision`, `numpy`, `pandas`, `matplotlib`, `jupyter`
+Install the dependencies:
 
 ```bash
-pip install torch torchvision numpy pandas matplotlib jupyter
+pip install -r requirements.txt
 ```
 
-A CUDA GPU is strongly recommended. Approximate run times on a single GPU: Exercise 1 ~5 min, Exercise 2 ~10 min, Exercise 3 ~1-2 h, Exercise 4 ~1.5-2.5 h. On a CPU they take much longer.
+For GPU support, install the PyTorch build that matches your CUDA version from <https://pytorch.org/get-started/locally/>.
 
-## How to reproduce
+## 2. How to run
 
-1. Clone the repository and install the requirements.
-2. Open a notebook in Jupyter (or Colab) and choose **Restart & Run All**. Run each notebook from the same folder so they share the `./data` directory.
-3. CIFAR-10 is downloaded automatically to `./data` on the first run.
-4. Exercises 3 and 4 save progress to `ex3_checkpoint.json` / `ex4_checkpoint.json` after every run. If a run is interrupted, re-run the training cell and it resumes. Delete the checkpoint file to start from scratch.
+### Option A – Google Colab (recommended)
+1. Open a notebook in Colab (File → Upload notebook, or open from the GitHub repository).
+2. Select **Runtime → Change runtime type → T4 GPU**.
+3. Run **Runtime → Run all**.
 
-## Experimental protocol (identical across all exercises)
+### Option B – Locally
+```bash
+pip install -r requirements.txt
+jupyter notebook
+```
+Open a notebook and choose **Kernel → Restart & Run All**.
 
-- **Data:** the official CIFAR-10 partitions. The 50,000 training images are split into 45,000 train / 5,000 validation with a fixed seed (42). The 10,000 test images are never used for training, tuning or model selection, and are evaluated once per trained model.
-- **Preprocessing:** per-channel mean/standard-deviation normalisation. Augmentation (Exercise 3 only) is applied to training images only.
-- **Training:** Adam, learning rate 0.001, batch size 128, 30 epochs, cross-entropy loss.
-- **Model selection:** the epoch with the best validation accuracy is restored before the final evaluation.
-- **Seeds:** Exercise 1 and 2 use seed 0; Exercises 3 and 4 use seeds 0, 1, 2 and report mean ± standard deviation.
+CIFAR-10 is downloaded automatically to `./data` on the first run through `torchvision.datasets.CIFAR10`.
 
-## Outputs
+## 3. Experimental protocol (identical in every notebook)
 
-Each notebook writes its results to the working directory:
+| Setting | Value |
+| --- | --- |
+| Dataset split | 50,000 training images → 45,000 train / 5,000 validation (fixed seed 42); 10,000 test images kept separate |
+| Preprocessing | `ToTensor()` + per-channel normalisation (mean 0.4914, 0.4822, 0.4465; std 0.2470, 0.2435, 0.2616) |
+| Loss / optimiser | Cross-entropy / Adam, learning rate 0.001 |
+| Batch size / epochs | 128 / 30 |
+| Model selection | Weights from the epoch with the highest **validation** accuracy |
+| Test set | Evaluated **once**, on the selected weights only. Never used for training or tuning. |
+| Seeds | Exercises 1–2: one seed. Exercises 3–4: seeds 0, 1, 2 (mean ± SD reported) |
 
-| Exercise | Tables / data | Figures |
-|---|---|---|
-| 1 | `ex1_results.csv`, `mlp_baseline.pth` | `mlp_loss_curve.png`, `mlp_accuracy_curve.png`, `mlp_confusion_matrix.png` |
-| 2 | `ex2_results.csv` | `figures/ex2_*.png` (loss curves, confusion matrices, learned filters) |
-| 3 | `ex3_raw_results.csv`, `ex3_summary.csv` | `figures/ex3_*.png` |
-| 4 | `ex4_raw_results.csv`, `ex4_summary.csv` | `figures/ex4_*.png` |
+Exercise 1 uses `random_split(..., generator=manual_seed(42))`. Exercises 2–4 use `torch.randperm(50000, generator=manual_seed(42))`.
+Both produce **exactly the same** train/validation indices, so every exercise uses the same partitions.
 
-## Key results (test accuracy)
+## 4. Reproducibility notes
 
-| Exercise | Model / setting | Test accuracy |
-|---|---|---|
-| 1 | MLP (1.71M parameters) | 52.4% |
-| 2 | CNN (60k parameters) vs MLP retrained in the same notebook | 71.9% vs 52.2% |
-| 3 | Baseline / Dropout / Augmentation / Both (mean of 3 seeds) | 71.3% / 75.7% / 76.6% / 75.2% |
-| 4 | Width and depth variants | see `ex4_summary.csv` |
+- Seeds are set for Python, NumPy and PyTorch (`set_seed`) and for each `DataLoader` generator.
+- GPU convolution kernels are not fully deterministic, so re-runs can differ slightly (typically < 0.5 percentage points). The 3-seed mean ± SD in Exercises 3–4 accounts for this.
+- **Resumable runs:** Exercises 3 and 4 save progress to `ex3_checkpoint.json` / `ex4_checkpoint.json` after every training run. If a Colab session disconnects, re-run the notebook and finished runs are skipped. **Delete the checkpoint file to start from scratch.**
 
-Small differences (a few tenths of a percent) between notebooks for the same architecture and seed are expected from GPU non-determinism and hardware differences.
+## 5. Outputs
 
-## Notes
+| Notebook | Files produced |
+| --- | --- |
+| Exercise 1 | `ex1_results.csv`, `mlp_baseline.pth`, `mlp_loss_curve.png`, `mlp_accuracy_curve.png`, `mlp_confusion_matrix.png` |
+| Exercise 2 | `ex2_results.csv`, `figures/ex2_loss_mlp_vs_cnn.png`, `figures/ex2_cnn_curves.png`, `figures/ex2_conf_mlp.png`, `figures/ex2_conf_cnn.png`, `figures/ex2_filters.png` |
+| Exercise 3 | `ex3_raw_results.csv` (per seed), `ex3_summary.csv` (mean ± SD), `figures/ex3_comparison.png`, `figures/ex3_loss_curves.png` |
+| Exercise 4 | `ex4_raw_results.csv`, `ex4_summary.csv`, `ex4_summary_formatted.csv`, `figures/ex4_summary.png`, `figures/ex4_loss_curves.png` |
 
-- The numbers above come from the submitted runs; the report and the CSV files in this repository are consistent with them.
-- If a notebook hangs on Windows at the first training step, set `NUM_WORKERS = 0` in the setup cell. This does not change the results.
-- Training and evaluation use only the standard `torchvision.datasets.CIFAR10` data.
+## 6. Key results (test accuracy)
 
-## Team
+| Model | Test accuracy | Trainable parameters |
+| --- | --- | --- |
+| MLP (Ex. 1) | 52.42% | 1,707,274 |
+| CNN [32, 64] (Ex. 2) | 71.90% | 60,362 |
+| CNN + data augmentation (Ex. 3) | 76.60 ± 0.40% | 60,362 |
+| CNN, 5 conv layers (Ex. 4, D3) | 73.32 ± 0.48% | 43,018 |
 
-| Name | Student ID | Contribution |
-|---|---|---|
-| | | |
-| | | |
-| | | |
-| | | |
+The full analysis is in the group report (PDF).
+
+## 7. Repository structure
+
+```
+.
+├── Exercise_1_MLP.ipynb
+├── Exercise2_CNN.ipynb
+├── Exercise3_PUSL3123.ipynb
+├── Exercise4_Width_Depth.ipynb
+├── requirements.txt
+├── README.md
+```
+
+## 8. Authors – Group 18
+
+| Member | Exercise |
+| --- | --- |
+| [Name 1] ([ID]) | Exercise 1 |
+| [Name 2] ([ID]) | Exercise 2 |
+| [Name 3] ([ID]) | Exercise 3 |
+| [Name 4] ([ID]) | Exercise 4 |
