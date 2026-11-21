@@ -1,0 +1,6 @@
+A,B,Test acc diff B-A (pp),p (test acc),Gap diff B-A (pp),p (gap)
+Baseline,Dropout (p=0.5),4.3133,0.0004,-3.4667,0.0097
+Baseline,Augmentation,5.2233,0.0019,-10.7885,0.0009
+Baseline,Dropout + Augment.,3.7867,0.0044,-11.5933,0.0012
+Dropout (p=0.5),Augmentation,0.91,0.0744,-7.3219,0.0001
+Augmentation,Dropout + Augment.,-1.4367,0.0001,-0.8048,0.0218
