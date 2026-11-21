@@ -8,7 +8,7 @@ MLP vs CNN architectures, regularisation, and the effect of model width and dept
 | 1 – MLP classifier | [`Exercise_1_MLP.ipynb`](Group_18_Set_Exercises/Exercise_1/Exercise_1_MLP.ipynb) | Three-layer MLP (3072→512→256→10); loss/accuracy curves; confusion matrix | ~6 min | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MenadiDev/PUSL3123_Group_18/blob/main/Group_18_Set_Exercises/Exercise_1/Exercise_1_MLP.ipynb) |
 | 2 – CNN vs MLP | [`Exercise2_CNN.ipynb`](Group_18_Set_Exercises/Exercise_2/Exercise2_CNN.ipynb) | Three-layer CNN vs retrained MLP under identical settings; parameter counts, confusion matrices, learnt filters | ~12 min | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MenadiDev/PUSL3123_Group_18/blob/main/Group_18_Set_Exercises/Exercise_2/Exercise2_CNN.ipynb) |
 | 3 – Regularisation | [`Exercise3_Regularisation.ipynb`](Group_18_Set_Exercises/Exercise_3/Exercise3_Regularisation.ipynb) | Baseline CNN vs dropout, data augmentation and both combined (3 seeds each, 12 runs); Welch t-tests; 60-epoch follow-up | ~2 h | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MenadiDev/PUSL3123_Group_18/blob/main/Group_18_Set_Exercises/Exercise_3/Exercise3_Regularisation.ipynb) |
-| 4 – Width and depth | [`Exercise4_Width_Depth.ipynb`](Group_18_Set_Exercises/Exercise_4/Exercise4_Width_Depth.ipynb) | Three widths and three depths of CNN (3 seeds each, 18 runs) | ~1.75 h | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MenadiDev/PUSL3123_Group_18/blob/main/Group_18_Set_Exercises/Exercise_4/Exercise4_Width_Depth.ipynb) |
+| 4 – Width and depth | [`Exercise4_Width_Depth.ipynb`](Group_18_Set_Exercises/Exercise_4/Exercise4_Width_Depth.ipynb) | Three widths and three depths of CNN (3 seeds each, 18 runs); compute cost (MACs); Welch t-tests | ~1.75 h | [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/MenadiDev/PUSL3123_Group_18/blob/main/Group_18_Set_Exercises/Exercise_4/Exercise4_Width_Depth.ipynb) |
 
 Each notebook is self-contained and can be run on its own. All four notebooks are submitted with their outputs, so results and figures can be read without re-running.
 
@@ -49,6 +49,8 @@ PUSL3123_Group_18/
         ├── ex4_raw_results.csv
         ├── ex4_summary.csv
         ├── ex4_summary_formatted.csv
+        ├── ex4_complexity.csv            # parameters, MACs and run time per variant
+        ├── ex4_significance.csv          # Welch t-test results
         ├── ex4_checkpoint.json           # saved training progress (see section 4)
         ├── ex4_summary.png
         └── ex4_loss_curves.png
@@ -125,11 +127,11 @@ The full analysis is in the group report (PDF).
 
 ## 7. Authors – Group 18
 
-| Member | Exercise |
-| --- | --- |
-| [Name 1] ([ID]) | Exercise 1 – MLP classifier |
-| [Name 2] ([ID]) | Exercise 2 – CNN vs MLP |
-| [Name 3] ([ID]) | Exercise 3 – Regularisation |
-| [Name 4] ([ID]) | Exercise 4 – Width and depth |
+| Name | Student ID | Exercise |
+| --- | --- | --- |
+| Gallage Silva | 10967115 | Exercise 1 – MLP classifier |
+| Vithanavasam Dewnith | 10967070 | Exercise 2 – CNN vs MLP |
+| Pinnagodage Menadi | 10967094 | Exercise 3 – Regularisation |
+| Nethumi Naotunna | 10967097 | Exercise 4 – Width and depth |
 
-PUSL3123 AI and Machine Learning · Module leader: Dr Vivek Singh
+PUSL3123 AI and Machine Learning · Module leader - Dr Vivek Singh
