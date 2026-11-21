@@ -1,0 +1,10 @@
+# PUSL3123 Assessment 1 - Group 18
+# Install with: pip install -r requirements.txt
+# For GPU support install the matching CUDA build of torch/torchvision from https://pytorch.org/get-started/locally/
+torch>=2.0
+torchvision>=0.15
+numpy>=1.24
+pandas>=2.0
+matplotlib>=3.7
+scipy>=1.10        # Welch t-tests (significance cells in Exercises 3 and 4)
+notebook>=7.0      # or jupyterlab; not needed on Google Colab
