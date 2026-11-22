@@ -1,4 +1,4 @@
-# PUSL3123 AI and Machine Learning – Assessment 1: Set Exercises (Group 18)
+# PUSL3123 Assessment 1 - Set Exercises (Group 18)
 
 Neural-network image classification on **CIFAR-10** with PyTorch. Four Jupyter notebooks, one per exercise, investigate
 MLP vs CNN architectures, regularisation, and the effect of model width and depth.
@@ -133,4 +133,4 @@ The full analysis is in the group report (PDF).
 | Pinnagodage Menadi | 10967094 | Exercise 3 – Regularisation |
 | Nethumi Naotunna | 10967097 | Exercise 4 – Width and depth |
 
-PUSL3123 AI and Machine Learning · Module leader - Dr Vivek Singh
+PUSL3123 AI and Machine Learning | Module leader - Dr Vivek Singh
